@@ -109,7 +109,7 @@ if (!isset($_SESSION['username'])) {
     <header>
         <h1>APLIKASI WEB</h1>
         <p>PENGELOLAAN DATA PEGAWAI</p>
-        <p>Welcome, <?php echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "!"; ?>
+        <p><?php echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "!"; ?>
             <a href="logout.php">Logout</a>
         </p>
     </header>

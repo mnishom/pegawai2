@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Database credentials
 $host = 'localhost';
 $dbname = 'komputer';
@@ -30,12 +31,12 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     $count = $stmt->fetchColumn();
 
     if ($count > 0) {
-        echo "Username $inputUsername is available";
+        echo "Login Successfully.";
         $_SESSION['username'] = $inputUsername;
-        header("refresh:0;url=mainpage.php");
+        header("refresh:0;url=index.php");
         exit();
     } else {
-        echo "Username $inputUsername is not available";
+        echo "invalid username or password";
         header("refresh:5;url=login.php");
         exit();
     }
