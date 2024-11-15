@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -101,6 +109,9 @@
     <header>
         <h1>APLIKASI WEB</h1>
         <p>PENGELOLAAN DATA PEGAWAI</p>
+        <p>Welcome, <?php echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "!"; ?>
+            <a href="logout.php">Logout</a>
+        </p>
     </header>
 
     <!-- Kontainer Utama -->

@@ -31,6 +31,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
     if ($count > 0) {
         echo "Username $inputUsername is available";
+        $_SESSION['username'] = $inputUsername;
         header("refresh:0;url=mainpage.php");
         exit();
     } else {
