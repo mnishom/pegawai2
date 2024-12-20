@@ -31,22 +31,21 @@
 
     <div class="container-fluid">
         <div class="row">
-
             <!-- Sidebar -->
             <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column p-3">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Dashboard</a>
+                            <a class="nav-link" href="./index.php">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Profil</a>
+                            <a class="nav-link" href="./profil.php">Profil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pesan</a>
+                            <a class="nav-link" href="./pegawai.php">Data Pegawai</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pengaturan</a>
+                            <a class="nav-link" href="./pengaturan.php">Pengaturan</a>
                         </li>
                     </ul>
                 </div>
@@ -54,27 +53,10 @@
 
             <!-- Content -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <h2>DATA PEGAWAI</h2>
-                <table style="width:70%; border: 1px;">
-                    <tr>
-                        <th>NIP</th>
-                        <th>Nama Pegawai</th>
-                        <th>Alamat</th>
-                        <th>Aksi</th>
-                    </tr>
-                    <tr>
-                        <td>123</td>
-                        <td>Maria Anders</td>
-                        <td>Tegal</td>
-                        <td><button type="button" class="btn btn-warning btn-sm">Edit</button> | Hapus</td>
-                    </tr>
-                    <tr>
-                        <td>124</td>
-                        <td>Francisco Chang</td>
-                        <td>Mexico</td>
-                        <td>Edit | Hapus</td>
-                    </tr>
-                </table>
+                <div class="row">
+                    <h2>Home > Dashboard</h2>
+
+                </div>
                 <div style="height:350px;">&nbsp;</div>
             </main>
         </div>
