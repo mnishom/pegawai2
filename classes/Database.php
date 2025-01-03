@@ -18,7 +18,14 @@ class Database
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $this->connection;
         } catch (PDOException $e) {
-            die("Database Connection Error: " . $e->getMessage());
+            $response = [
+                'status' => 'failed',
+                'message' => 'Gagal terhubung ke basis data.' . $e->getMessage(),
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($response);
+
+            //die("Database Connection Error: " . $e->getMessage());
         }
     }
 }

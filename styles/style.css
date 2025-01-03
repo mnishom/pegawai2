@@ -1,18 +1,6 @@
-/* Gaya untuk table */
-/* table,
-th,
-td {
-    border: 1px solid blue;
-    border-collapse: collapse;
+.nav-item:hover {
+    background-color: #007bff; 
 }
-
-th,
-td {
-    padding: 5px;
-} */
-
-/* .inline-container {
-    display: flex; 
-    align-items: center; 
-    gap: 10px;
-} */
+.nav-item:hover .nav-link {
+    color: #fff;
+}

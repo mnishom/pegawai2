@@ -1,133 +1,186 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+include 'header.php';
+?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikasi Kepegawaian</title>
-    <link rel="icon" type="image/x-icon" href="images/logo2.ico">
 
-    <!-- Link ke CSS Bootstrap -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles/style.css">
-</head>
 
-<body>
+<!-- Content -->
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="row">
+        <h2>Home <i class="fa-solid fa-angle-right"></i> Data Pegawai</h2>
+    </div>
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-md-4">
+            <button type="button" id="btnaddpegawai" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalAdd">Tambah Data</button>
+        </div>
+        <div class="col-md-4">&nbsp;
+        </div>
+        <div class="col-md-4">
+            <form id="searchData" name="searchData" class="form-inline">
+                <input type="text" name="key" id="key" class="form-control mr-2" placeholder="Search..." aria-label="Search">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>NIP</th>
+                    <th>Nama Pegawai</th>
+                    <th>Alamat</th>
+                    <th>No. HP</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="hasilpencarian">
 
-    <!-- Header -->
-    <header class="bg-primary text-white text-center py-4">
-        <h1>APLIKASI PENGELOLAAN DATA PEGAWAI</h1>
-        <?php
-        session_start();
+            </tbody>
+        </table>
+    </div>
 
-        if (!isset($_SESSION['username'])) {
-            header("Location: login.php");
-            exit();
-        }
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>
 
-        echo "<h3>Welcome, " . htmlspecialchars($_SESSION['username']) . " | <a href='logout.php' class='btn btn-danger'>Logout</a></h3>";
-        ?>
-    </header>
-
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column p-3">
-                        <li class="nav-item">
-                            <a class="nav-link" href="./index.php">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./profil.php">Profil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./pegawai.php">Data Pegawai</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./pengaturan.php">Pengaturan</a>
-                        </li>
-                    </ul>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </nav>
-
-            <!-- Content -->
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <div class="row">
-                    <h2>DATA PEGAWAI</h2>
+                <div class="modal-body">
+                    ...
                 </div>
-                <div class="row" style="padding-bottom: 10px;">
-                    <button type="button" class="btn btn-success btn-sm">Tambah Data</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
-                <div class="row">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>NIP</th>
-                                <th>Nama Pegawai</th>
-                                <th>Alamat</th>
-                                <th>No. HP</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            require_once __DIR__ . '\classes\Database.php';
-                            class Pegawai
-                            {
-                                private $db;
-                                public function __construct()
-                                {
-                                    $database = new Database();
-                                    $this->db = $database->connect();
-                                }
-
-                                public function getAllEmployee()
-                                {
-                                    $query = $this->db->prepare("SELECT * FROM employee");
-                                    $query->execute();
-                                    return $query->fetchAll(PDO::FETCH_ASSOC);
-                                }
-                            }
-
-                            $pegawai = new Pegawai();
-                            $datapegawai = $pegawai->getAllEmployee();
-
-                            $nom = 1;
-                            foreach ($datapegawai as $peg) {
-                            ?>
-                                <tr>
-                                    <td><?php echo $nom; ?></td>
-                                    <td><?php echo $peg['nip']; ?></td>
-                                    <td><?php echo $peg['nama']; ?></td>
-                                    <td><?php echo $peg['alamat']; ?></td>
-                                    <td><?php echo $peg['no_hp']; ?></td>
-                                    <td>
-                                        <button type="button" class="btn btn-warning btn-sm">Edit</button> | <button type="button" class="btn btn-danger btn-sm">Hapus</button>
-                                    </td>
-                                </tr>
-                            <?php
-                                $nom++;
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-                <div style="height:350px;">&nbsp;</div>
-            </main>
+            </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-        <p>&copy; 2024 Website Anda | Semua hak dilindungi</p>
-    </footer>
 
-    <!-- Script JavaScript Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+    <!-- The Modal -->
+    <div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Pegawai</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <form id="formAdd" method="POST">
+                        <div class="form-group">
+                            <label for="nip">NIP</label>
+                            <input type="text" class="form-control" id="nip" name="nip" placeholder="Ketik NIP" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nama">NAMA</label>
+                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Ketik Nama Pegawai" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat">Alamat</label>
+                            <textarea class="form-control" id="alamat" name="alamat" placeholder="Ketik Alamat" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="hp">No. HP</label>
+                            <input type="text" class="form-control" id="hp" name="hp" placeholder="Ketik No.HP" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" id="sendAdd">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <div id="response-add-data" class="text-center alert alert-danger"></div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-primary" id="sendNow">Simpan Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height:350px;">&nbsp;</div>
+</main>
+<?php
+include 'footer.php';
+?>
+<script>
+    $(document).ready(function() {
+        //$('#sendAdd').hide();
+        $('#response-add-data').hide();
+        $.ajax({
+            url: 'AppActions.php',
+            type: 'POST',
+            data: {
+                cmd: "init",
+                action: "getAllData"
+            },
+            success: function(response) {
+                $('#hasilpencarian').html(response.result);
+            }
+        });
 
-</html>
+        $("#sendNow").on('click', function(e) {
+            $('#sendAdd').trigger('click');
+        });
+
+        $("#btnaddpegawai").on('click', function(e) {
+            setTimeout(function() {
+                document.getElementById('nip').focus();
+            }, 750);
+        });
+
+        $('#formAdd').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: 'AppActions.php',
+                type: 'POST',
+                data: $('#formAdd').serialize() + "&action=saveData",
+                success: function(response) {
+                    //console.log(response);
+                    if (response.status === "success") {
+                        //window.location.href = "pegawai.php";
+                        $('#response-add-data').show();
+                        $('#response-add-data').html('<p>' + response.message + '</p>');
+                        setTimeout(function() {
+                            $('#response-add-data').hide();
+                        }, 3000);
+                    } else {
+                        $('#response-add-data').show();
+                        $('#response-add-data').html('<p>' + response.message + '</p>');
+                        setTimeout(function() {
+                            $('#response-add-data').hide();
+                        }, 3000);
+                    }
+                }
+            });
+        });
+
+        $('#key').on('keyup', function() {
+            console.log($(this).val());
+            $.ajax({
+                url: 'AppActions.php',
+                type: 'POST',
+                data: "key=" + $(this).val() + "&action=cariData",
+                success: function(response) {
+                    console.log(response.result);
+                    $('#hasilpencarian').html('');
+                    $('#hasilpencarian').html(response.result);
+                }
+            });
+        });
+    });
+</script>
+<?php
+include 'ends.php';
+?>

@@ -15,6 +15,7 @@ if (isset($_SESSION['username'])) {
     <link rel="icon" type="image/png" href="images/logo.png">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -42,28 +43,32 @@ if (isset($_SESSION['username'])) {
     <div class="container">
         <div class="login-container bg-light p-4">
             <h3 class="text-center mb-4">LOGIN</h3>
-            <form method="post">
-                <!-- Username input -->
+            <form id="form-login">
                 <div class="form-group mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" autocomplete="off" required>
                 </div>
 
-                <!-- Password input -->
                 <div class="form-group mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" autocomplete="off" required>
                 </div>
 
-                <!-- Remember me checkbox -->
-                <div class="form-check mb-3">
+                <!-- <div class="form-check mb-3">
                     <input type="checkbox" class="form-check-input" id="rememberMe">
                     <label class="form-check-label" for="rememberMe">Remember me</label>
+                </div> -->
+
+                <div class="form-group mb-3">
+                    &nbsp;
                 </div>
 
-                <!-- Login button -->
-                <button type="button" id="loginBTN" class="btn btn-primary w-100">Login Now</button>
+                <div class="text-center mb-4">
+                    <button type="submit" id="loginBTN" class="btn btn-primary w-50">
+                        Login Now <i class="fa-solid fa-right-to-bracket"></i></button>
+                </div>
             </form>
+            <div id="response" class="text-center alert alert-danger"></div>
 
             <!-- Optional: link to register or reset password -->
             <!-- <div class="text-center mt-3">
@@ -87,43 +92,31 @@ if (isset($_SESSION['username'])) {
         // });
         $(document).ready(function() {
             document.getElementById('username').focus();
-            var usr = $('#username').val();
-            var pwd = $('#password').val();
+            $('#response').hide();
 
-
-            $("#loginBTN").on("click", function() {
+            $('#form-login').on('submit', function(e) {
+                e.preventDefault();
+                //var formData = $(this).serialize();
                 $.ajax({
-                    url: 'login-action.php',
+                    url: 'AppActions.php',
                     type: 'POST',
-                    data: {
-                        key1: $('#username').val(),
-                        key2: $('#password').val()
-                    },
+                    data: $('#form-login').serialize() + "&action=login",
                     success: function(response) {
+                        //console.log(response);
                         if (response.status === "success") {
-                            alert(response.message);
-                            window.location.replace("https://localhost/pegawai/index.php");
+                            window.location.href = "index.php";
                         } else {
-                            alert(response.message);
+                            $('#response').show();
+                            $('#response').html('<p>' + response.message + '</p>');
+                            setTimeout(function() {
+                                $('#response').hide();
+                            }, 3000);
                         }
-
-                        //console.log('Response from PHP:', response);
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle any errors
-                        //console.error('Error:', error);
                     }
                 });
             });
-
-
-
-
         });
     </script>
-
-
-
 </body>
 
 </html>
