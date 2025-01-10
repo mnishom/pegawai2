@@ -36,13 +36,13 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column p-3">
                         <li class="nav-item">
-                            <a class="nav-link" href="./index.php">Dashboard</a>
+                            <a class="nav-link" href="./index.php"><i class="fa-solid fa-gauge"></i> Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./pegawai.php">Data Pegawai</a>
+                            <a class="nav-link" href="./pegawai.php"><i class="fa-solid fa-users"></i> Data Pegawai</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./profil.php">Profil</a>
+                            <a class="nav-link" href="./profil.php"><i class="fa-regular fa-id-card"></i> Profil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./pengaturan.php"><i class="fa-solid fa-gears"></i> Pengaturan</a>

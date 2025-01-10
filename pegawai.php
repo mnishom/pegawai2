@@ -11,7 +11,7 @@ include 'header.php';
     </div>
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-md-4">
-            <button type="button" id="btnaddpegawai" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalAdd">Tambah Data</button>
+            <button type="button" id="btnaddpegawai" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalAdd"><i class="fa-regular fa-square-plus"></i> Tambah Data</button>
         </div>
         <div class="col-md-4">&nbsp;
         </div>

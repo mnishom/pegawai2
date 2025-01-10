@@ -27,7 +27,7 @@ class AppHandler
             $htmldata .= "<td>" . $peg['alamat'] . "</td>";
             $htmldata .= "<td>" . $peg['no_hp'] . "</td>";
             $htmldata .= "<td>";
-            $htmldata .= "<button type='button' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modalEdit' onclick=\"setData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "','" . $peg['alamat'] . "','" . $peg['no_hp'] . "')\">Edit</button> | <button type='button' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#modalDelete' onclick=\"modalHapusData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "')\">Hapus</button>";
+            $htmldata .= "<button type='button' title='Ubah Data' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modalEdit' onclick=\"setData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "','" . $peg['alamat'] . "','" . $peg['no_hp'] . "')\"><i class=\"fa-solid fa-user-pen\"></i></button> | <button title='Hapus Data' type='button' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#modalDelete' onclick=\"modalHapusData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "')\"><i class=\"fa-solid fa-trash-can\"></i></button>";
             $htmldata .= "</td>";
             $htmldata .= "</tr>";
             $nom++;
@@ -125,7 +125,7 @@ class AppHandler
             $htmldata .= "<td>" . $peg['alamat'] . "</td>";
             $htmldata .= "<td>" . $peg['no_hp'] . "</td>";
             $htmldata .= "<td>";
-            $htmldata .= "<button type='button' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modalEdit' onclick=\"setData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "','" . $peg['alamat'] . "','" . $peg['no_hp'] . "')\">Edit</button> | <button type='button' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#modalDelete' onclick=\"modalHapusData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "')\">Hapus</button>";
+            $htmldata .= "<button type='button' title='Ubah Data' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modalEdit' onclick=\"setData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "','" . $peg['alamat'] . "','" . $peg['no_hp'] . "')\"><i class=\"fa-solid fa-user-pen\"></i></button> | <button title='Hapus Data' type='button' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#modalDelete' onclick=\"modalHapusData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "')\"><i class=\"fa-solid fa-trash-can\"></i></button>";
             $htmldata .= "</td>";
             $htmldata .= "</tr>";
             $nom++;
