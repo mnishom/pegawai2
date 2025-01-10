@@ -27,7 +27,7 @@ class AppHandler
             $htmldata .= "<td>" . $peg['alamat'] . "</td>";
             $htmldata .= "<td>" . $peg['no_hp'] . "</td>";
             $htmldata .= "<td>";
-            $htmldata .= "<button type='button' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modalEdit'>Edit</button> | <button type='button' class='btn btn-danger btn-sm'>Hapus</button>";
+            $htmldata .= "<button type='button' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modalEdit' onclick=\"setData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "','" . $peg['alamat'] . "','" . $peg['no_hp'] . "')\">Edit</button> | <button type='button' class='btn btn-danger btn-sm'>Hapus</button>";
             $htmldata .= "</td>";
             $htmldata .= "</tr>";
             $nom++;
@@ -42,17 +42,34 @@ class AppHandler
 
     public function saveData($data)
     {
-        session_start();
-        $nip = htmlspecialchars($data['nip']);
-        $nama = htmlspecialchars($data['nama']);
-        $alamat = htmlspecialchars($data['alamat']);
-        $hp = htmlspecialchars($data['hp']);
-        $response = [
-            'status' => 'success',
-            'message' => 'NIP:' . $nip,
-        ];
-        //header('Content-Type: application/json');
-        return json_encode($response);
+        try {
+            session_start();
+            $nip = htmlspecialchars($data['nip']);
+            $nama = htmlspecialchars($data['nama']);
+            $alamat = htmlspecialchars($data['alamat']);
+            $hp = htmlspecialchars($data['hp']);
+
+            $Query = "INSERT INTO employee (nip,nama,alamat,no_hp) VALUES (:nip, :nama, :alamat, :no_hp)";
+            $stmt = $this->pdo->prepare($Query);
+            $stmt->bindParam(':nip', $nip);
+            $stmt->bindParam(':nama', $nama);
+            $stmt->bindParam(':alamat', $alamat);
+            $stmt->bindParam(':no_hp', $hp);
+            $stmt->execute();
+
+            $response = [
+                'status' => 'success',
+                'message' => 'Data berhasil ditambahkan',
+            ];
+            //header('Content-Type: application/json');
+            return json_encode($response);
+        } catch (PDOException $e) {
+            $response = [
+                "status" => "error",
+                "message" => "Error: " . $e->getMessage(),
+            ];
+            return json_encode($response);
+        }
     }
 
 
@@ -107,7 +124,7 @@ class AppHandler
             $htmldata .= "<td>" . $peg['alamat'] . "</td>";
             $htmldata .= "<td>" . $peg['no_hp'] . "</td>";
             $htmldata .= "<td>";
-            $htmldata .= "<button type='button' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modalEdit'>Edit</button> | <button type='button' class='btn btn-danger btn-sm'>Hapus</button>";
+            $htmldata .= "<button type='button' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modalEdit' onclick=\"setData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "','" . $peg['alamat'] . "','" . $peg['no_hp'] . "')\">Edit</button> | <button type='button' class='btn btn-danger btn-sm'>Hapus</button>";
             $htmldata .= "</td>";
             $htmldata .= "</tr>";
             $nom++;
