@@ -44,16 +44,17 @@ include 'header.php';
     <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEditLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalEditLabel">Edit Data Pegawai</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!-- Modal Body -->
-                <div class="modal-body">
-                    <form id="formEdit" method="POST">
+                <form id="formEdit" method="POST">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalEditLabel">Edit Data Pegawai</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+
                         <div class="form-group">
                             <label for="enip">NIP</label>
                             <input type="hidden" id="eid" name="eid">
@@ -71,17 +72,15 @@ include 'header.php';
                             <label for="ehp">No. HP</label>
                             <input type="text" class="form-control" id="ehp" name="ehp" placeholder="Ketik No.HP" required>
                         </div>
-                        <div class="form-group">
-                            <button type="submit" id="sendEdit">Update</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- Modal Footer -->
-                <div class="modal-footer">
-                    <div id="response-edit-data" class="text-center alert alert-success"></div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-primary" id="sendEditNow">Update Data</button>
-                </div>
+
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <div id="response-edit-data" class="text-center alert alert-success"></div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary" id="sendEditNow">Update Data</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -90,16 +89,17 @@ include 'header.php';
     <div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="modalAddLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalAddLabel">Tambah Data Pegawai</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!-- Modal Body -->
-                <div class="modal-body">
-                    <form id="formAdd" method="POST">
+                <form id="formAdd" method="POST">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalAddLabel">Tambah Data Pegawai</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+
                         <div class="form-group">
                             <label for="nip">NIP</label>
                             <input type="text" class="form-control" id="nip" name="nip" placeholder="Ketik NIP" required>
@@ -116,17 +116,14 @@ include 'header.php';
                             <label for="hp">No. HP</label>
                             <input type="text" class="form-control" id="hp" name="hp" placeholder="Ketik No.HP" required>
                         </div>
-                        <div class="form-group">
-                            <button type="submit" id="sendAdd">Save</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- Modal Footer -->
-                <div class="modal-footer">
-                    <div id="response-add-data" class="text-center alert alert-success"></div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-primary" id="sendNow">Simpan Data</button>
-                </div>
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <div id="response-add-data" class="text-center alert alert-success"></div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary" id="sendNow">Simpan Data</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -170,14 +167,6 @@ include 'footer.php';
     $(document).ready(function() {
         hideElements();
         loadData();
-
-        $("#sendNow").on('click', function(e) {
-            $('#sendAdd').trigger('click');
-        });
-
-        $("#sendEditNow").on('click', function(e) {
-            $('#sendEdit').trigger('click');
-        });
 
         $("#btnaddpegawai").on('click', function(e) {
             setTimeout(function() {
@@ -284,12 +273,8 @@ include 'footer.php';
     }
 
     function hideElements() {
-        $('#sendAdd').hide();
         $('#response-add-data').hide();
-
-        $('#sendEdit').hide();
         $('#response-edit-data').hide();
-
         $('#response-del-data').hide();
     }
 
