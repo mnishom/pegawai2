@@ -1,6 +1,0 @@
-bash
-git init
-git add .
-git commit -m "Initial commit"
-git config credential.helper store
-git push https://github.com/mnishom/pegawai2.git

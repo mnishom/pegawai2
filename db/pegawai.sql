@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2025 at 04:31 PM
+-- Generation Time: Jan 10, 2025 at 04:13 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -61,7 +61,9 @@ CREATE TABLE `employee` (
 
 INSERT INTO `employee` (`id`, `nip`, `nama`, `alamat`, `no_hp`) VALUES
 (1, '1990081720200410', 'Mutiarawati', 'Jl. Kayangan No. 09', '081378451268'),
-(2, '1990081720200411', 'Sigit Purnomo', 'Jl. Rembulan No. 15', '081547475126');
+(2, '1990081720200411', 'Sigit Purnomo', 'Jl. Rembulan No. 15', '081547475126'),
+(3, '1990081720200412', 'Hendarto', 'Jl. Kenanga No.19', '0814555777888'),
+(4, '1990081720200413', 'Gernowo', 'Semarang', '0856252525444');
 
 --
 -- Indexes for dumped tables
@@ -93,7 +95,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
