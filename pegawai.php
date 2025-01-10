@@ -7,7 +7,7 @@ include 'header.php';
 <!-- Content -->
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="row">
-        <h2>Home <i class="fa-solid fa-angle-right"></i> Data Pegawai</h2>
+        <h2><i class="fa-solid fa-house-chimney-window"></i> Home <i class="fa-solid fa-angle-right"></i> Data Pegawai</h2>
     </div>
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-md-4">
@@ -18,7 +18,7 @@ include 'header.php';
         <div class="col-md-4">
             <form id="searchData" name="searchData" class="form-inline">
                 <input type="text" name="key" id="key" class="form-control mr-2" placeholder="Search..." aria-label="Search">
-                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
         </div>
     </div>

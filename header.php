@@ -26,7 +26,7 @@
             exit();
         }
 
-        echo "<h3>Welcome, " . htmlspecialchars($_SESSION['username']) . " | <a href='logout.php' class='btn btn-danger'>Logout</a></h3>";
+        echo "<h3>Welcome, " . htmlspecialchars($_SESSION['username']) . " | <a href='logout.php' class='btn btn-danger'>Logout <i class=\"fa-solid fa-arrow-right-from-bracket\"></i></a></h3>";
         ?>
     </header>
     <div class="container-fluid">
