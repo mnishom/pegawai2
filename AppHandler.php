@@ -125,7 +125,7 @@ class AppHandler
             $htmldata .= "<td>" . $peg['alamat'] . "</td>";
             $htmldata .= "<td>" . $peg['no_hp'] . "</td>";
             $htmldata .= "<td>";
-            $htmldata .= "<button type='button' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modalEdit' onclick=\"setData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "','" . $peg['alamat'] . "','" . $peg['no_hp'] . "')\">Edit</button> | <button type='button' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#modalHapus' onclick=\"hapusData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "')\">Hapus</button>";
+            $htmldata .= "<button type='button' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modalEdit' onclick=\"setData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "','" . $peg['alamat'] . "','" . $peg['no_hp'] . "')\">Edit</button> | <button type='button' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#modalDelete' onclick=\"modalHapusData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "')\">Hapus</button>";
             $htmldata .= "</td>";
             $htmldata .= "</tr>";
             $nom++;
