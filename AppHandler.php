@@ -27,7 +27,7 @@ class AppHandler
             $htmldata .= "<td>" . $peg['alamat'] . "</td>";
             $htmldata .= "<td>" . $peg['no_hp'] . "</td>";
             $htmldata .= "<td>";
-            $htmldata .= "<button type='button' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modalEdit' onclick=\"setData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "','" . $peg['alamat'] . "','" . $peg['no_hp'] . "')\">Edit</button> | <button type='button' class='btn btn-danger btn-sm'>Hapus</button>";
+            $htmldata .= "<button type='button' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modalEdit' onclick=\"setData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "','" . $peg['alamat'] . "','" . $peg['no_hp'] . "')\">Edit</button> | <button type='button' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#modalDelete' onclick=\"modalHapusData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "')\">Hapus</button>";
             $htmldata .= "</td>";
             $htmldata .= "</tr>";
             $nom++;
@@ -49,6 +49,7 @@ class AppHandler
             $alamat = htmlspecialchars($data['alamat']);
             $hp = htmlspecialchars($data['hp']);
 
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $Query = "INSERT INTO employee (nip,nama,alamat,no_hp) VALUES (:nip, :nama, :alamat, :no_hp)";
             $stmt = $this->pdo->prepare($Query);
             $stmt->bindParam(':nip', $nip);
@@ -124,7 +125,7 @@ class AppHandler
             $htmldata .= "<td>" . $peg['alamat'] . "</td>";
             $htmldata .= "<td>" . $peg['no_hp'] . "</td>";
             $htmldata .= "<td>";
-            $htmldata .= "<button type='button' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modalEdit' onclick=\"setData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "','" . $peg['alamat'] . "','" . $peg['no_hp'] . "')\">Edit</button> | <button type='button' class='btn btn-danger btn-sm'>Hapus</button>";
+            $htmldata .= "<button type='button' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modalEdit' onclick=\"setData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "','" . $peg['alamat'] . "','" . $peg['no_hp'] . "')\">Edit</button> | <button type='button' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#modalHapus' onclick=\"hapusData('" . $peg['id'] . "','" . $peg['nip'] . "','" . $peg['nama'] . "')\">Hapus</button>";
             $htmldata .= "</td>";
             $htmldata .= "</tr>";
             $nom++;
@@ -140,7 +141,41 @@ class AppHandler
 
     public function updateData($data)
     {
-        $datetime = date('Y-m-d H:i:s');
-        return json_encode(['a' => $datetime]);
+        $id = htmlspecialchars($data['eid']);
+        $nip = htmlspecialchars($data['enip']);
+        $nama = htmlspecialchars($data['enama']);
+        $alamat = htmlspecialchars($data['ealamat']);
+        $hp = htmlspecialchars($data['ehp']);
+
+        $stmt = $this->pdo->prepare("UPDATE employee SET nip = :nip, nama = :nama, alamat = :alamat, no_hp = :hp WHERE id = :id");
+        $stmt->bindParam(':nip', $nip);
+        $stmt->bindParam(':nama', $nama);
+        $stmt->bindParam(':alamat', $alamat);
+        $stmt->bindParam(':hp', $hp);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        $response = [
+            'status' => 'success',
+            'message' => 'Data berhasil diupdate',
+        ];
+        //header('Content-Type: application/json');
+        return json_encode($response);
+    }
+
+    public function deleteData($data)
+    {
+        $delid = htmlspecialchars($data['delid']);
+
+        $stmt = $this->pdo->prepare("DELETE FROM employee WHERE id = :id");
+        $stmt->bindParam(':id', $delid);
+        $stmt->execute();
+
+        $response = [
+            'status' => 'success',
+            'message' => 'Data berhasil dihapus',
+        ];
+        //header('Content-Type: application/json');
+        return json_encode($response);
     }
 }

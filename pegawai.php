@@ -53,7 +53,7 @@ include 'header.php';
                 </div>
                 <!-- Modal Body -->
                 <div class="modal-body">
-                    <form id="formAdd" method="POST">
+                    <form id="formEdit" method="POST">
                         <div class="form-group">
                             <label for="enip">NIP</label>
                             <input type="hidden" id="eid" name="eid">
@@ -78,7 +78,7 @@ include 'header.php';
                 </div>
                 <!-- Modal Footer -->
                 <div class="modal-footer">
-                    <div id="e-response-add-data" class="text-center alert alert-success"></div>
+                    <div id="response-edit-data" class="text-center alert alert-success"></div>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     <button type="button" class="btn btn-primary" id="sendEditNow">Update Data</button>
                 </div>
@@ -131,7 +131,36 @@ include 'header.php';
         </div>
     </div>
 
+    <!-- Modal: hapus data-->
+    <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="formDelete" method="POST">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalDeleteLabel">Hapus Data</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" name="delid" id="delid">
+                            <p>Apakah anda yakin ingin menghapus data pegawai <b><label id="identitaspegawai"></label></b></p>
+                        </div>
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary" id="delNow">Hapus Data</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
+    <!-- blank div 350px -->
     <div style="height:350px;">&nbsp;</div>
 </main>
 <?php
@@ -146,10 +175,30 @@ include 'footer.php';
             $('#sendAdd').trigger('click');
         });
 
+        $("#sendEditNow").on('click', function(e) {
+            $('#sendEdit').trigger('click');
+        });
+
         $("#btnaddpegawai").on('click', function(e) {
             setTimeout(function() {
                 document.getElementById('nip').focus();
             }, 750);
+        });
+
+        $("#formDelete").on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: 'AppActions.php',
+                type: 'POST',
+                data: $('#formDelete').serialize() + "&action=deleteData",
+                success: function(response) {
+                    //console.log(response);
+                    if (response.status === "success") {
+                        loadData();
+                        $('#modalDelete').modal('hide');
+                    }
+                }
+            });
         });
 
         $('#formAdd').on('submit', function(e) {
@@ -163,14 +212,14 @@ include 'footer.php';
                     if (response.status === "success") {
                         //window.location.href = "pegawai.php";
                         $('#response-add-data').show();
-                        $('#response-add-data').html('<p>' + response.message + '</p>');
+                        $('#response-add-data').html(response.message);
                         loadData();
                         setTimeout(function() {
                             $('#response-add-data').hide();
                         }, 3000);
                     } else {
                         $('#response-add-data').show();
-                        $('#response-add-data').html('<p>' + response.message + '</p>');
+                        $('#response-add-data').html(response.message);
                         setTimeout(function() {
                             $('#response-add-data').hide();
                         }, 3000);
@@ -179,8 +228,35 @@ include 'footer.php';
             });
         });
 
+        $('#formEdit').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: 'AppActions.php',
+                type: 'POST',
+                data: $('#formEdit').serialize() + "&action=updateData",
+                success: function(response) {
+                    //console.log(response);
+                    if (response.status === "success") {
+                        //window.location.href = "pegawai.php";
+                        $('#response-edit-data').show();
+                        $('#response-edit-data').html(response.message);
+                        loadData();
+                        setTimeout(function() {
+                            $('#response-edit-data').hide();
+                        }, 3000);
+                    } else {
+                        $('#response-edit-data').show();
+                        $('#response-edit-data').html(response.message);
+                        setTimeout(function() {
+                            $('#response-edit-data').hide();
+                        }, 3000);
+                    }
+                }
+            });
+        });
+
         $('#key').on('keyup', function() {
-            console.log($(this).val());
+            //console.log($(this).val());
             $.ajax({
                 url: 'AppActions.php',
                 type: 'POST',
@@ -193,6 +269,11 @@ include 'footer.php';
             });
         });
     });
+
+    function modalHapusData(id, nip, nama) {
+        $("#delid").val(id);
+        $("#identitaspegawai").html("[" + nip + "] " + nama + "?");
+    }
 
     function setData(id, enip, enama, ealamat, ehp) {
         $('#eid').val(id);
@@ -207,7 +288,9 @@ include 'footer.php';
         $('#response-add-data').hide();
 
         $('#sendEdit').hide();
-        $('#e-response-add-data').hide();
+        $('#response-edit-data').hide();
+
+        $('#response-del-data').hide();
     }
 
     function loadData() {
